@@ -9,7 +9,7 @@ import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
-const registerPath='/user/register';
+const registerPath = '/user/register';
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -22,9 +22,11 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
+      const msg = queryCurrentUser({
+        skipErrorHandler: false,
       });
+
+      console.log('msg', msg);
 
       return msg;
     } catch (error) {
@@ -33,16 +35,14 @@ export async function getInitialState(): Promise<{
     return undefined;
   };
 
-
   // 如果不是登录或者注册页面，执行
   const { location } = history;
   //白名单
-  const whiteList=[loginPath,registerPath];
+  const whiteList = [loginPath, registerPath];
   if (!whiteList.includes(location.pathname)) {
     const currentUser = await fetchUserInfo();
 
     //console.log(currentUser);
-
 
     return {
       // @ts-ignore
@@ -59,7 +59,6 @@ export async function getInitialState(): Promise<{
     settings: defaultSettings as Partial<LayoutSettings>,
   };
 }
-
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {

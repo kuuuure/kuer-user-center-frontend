@@ -1,14 +1,16 @@
-import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
+import { SmileTwoTone } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import '@umijs/max';
 import { Alert, Card, Typography } from 'antd';
 import React from 'react';
 const Admin: React.FC = () => {
+  console.log('admin');
+
   return (
-    <PageContainer content={' 这个页面只有 admin 权限才能查看'}>
+    <PageContainer content={' 您是K星的管理员，可以管理K星的用户'}>
       <Card>
         <Alert
-          message={'更快更强的重型组件，已经发布。'}
+          message={'帮助K星变得更美好~'}
           type="success"
           showIcon
           banner
@@ -23,21 +25,10 @@ const Admin: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          <SmileTwoTone /> Ant Design Pro <HeartTwoTone twoToneColor="#eb2f96" /> You
+          {/*<SmileTwoTone /> K star <HeartTwoTone twoToneColor="#eb2f96" /> You*/}
+          <SmileTwoTone /> make K star great !
         </Typography.Title>
       </Card>
-      <p
-        style={{
-          textAlign: 'center',
-          marginTop: 24,
-        }}
-      >
-        Want to add more pages? Please refer to{' '}
-        <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-          use block
-        </a>
-        。
-      </p>
     </PageContainer>
   );
 };

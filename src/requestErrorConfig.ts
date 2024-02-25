@@ -3,6 +3,24 @@ import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
 
 // 错误处理方案： 错误类型
+// enum ErrorShowType {
+//   SILENT = 0,
+//   WARN_MESSAGE = 1,
+//   ERROR_MESSAGE = 2,
+//   NOTIFICATION = 3,
+//   REDIRECT = 9,
+// }
+
+// 与后端约定的响应数据格式
+// interface ResponseStructure {
+//   success: boolean;
+//   data: any;
+//   errorCode?: number;
+//   errorMessage?: string;
+//   showType?: ErrorShowType;
+// }
+
+//自定义:错误异常处理方式
 enum ErrorShowType {
   SILENT = 0,
   WARN_MESSAGE = 1,
@@ -10,13 +28,13 @@ enum ErrorShowType {
   NOTIFICATION = 3,
   REDIRECT = 9,
 }
-// 与后端约定的响应数据格式
+
+// 自定义:与后端约定的响应数据格式
 interface ResponseStructure {
   success: boolean;
+  errorCode: number;
   data: any;
-  errorCode?: number;
-  errorMessage?: string;
-  showType?: ErrorShowType;
+  msg?: string;
 }
 
 /**
@@ -29,36 +47,51 @@ export const errorConfig: RequestConfig = {
   errorConfig: {
     // 错误抛出
     errorThrower: (res) => {
-      const { success, data, errorCode, errorMessage, showType } =
-        res as unknown as ResponseStructure;
-      if (!success) {
-        const error: any = new Error(errorMessage);
+      const { data, errorCode, msg } = res as unknown as ResponseStructure;
+
+      console.log('errorThrower开始工作');
+      console.log('res', res);
+
+      if (errorCode !== 0) {
+        const error: any = new Error(msg);
         error.name = 'BizError';
-        error.info = { errorCode, errorMessage, showType, data };
+        error.info = { errorCode, msg, data };
+        //console.log("抛出错误",error);
         throw error; // 抛出自制的错误
       }
     },
     // 错误接收及处理
     errorHandler: (error: any, opts: any) => {
+      console.log('errorHandler开始工作');
+
+      console.log(error);
+      console.log('opts:', opts);
+
       if (opts?.skipErrorHandler) throw error;
+
+      //console.log("error:",error);
+
       // 我们的 errorThrower 抛出的错误。
       if (error.name === 'BizError') {
         const errorInfo: ResponseStructure | undefined = error.info;
+
+        //console.log("errorInfo:",errorInfo);
+
         if (errorInfo) {
-          const { errorMessage, errorCode } = errorInfo;
-          switch (errorInfo.showType) {
+          const { msg, errorCode } = errorInfo;
+          switch (errorInfo.errorCode) {
             case ErrorShowType.SILENT:
               // do nothing
               break;
             case ErrorShowType.WARN_MESSAGE:
-              message.warning(errorMessage);
+              message.warning(msg);
               break;
             case ErrorShowType.ERROR_MESSAGE:
-              message.error(errorMessage);
+              message.error(msg);
               break;
             case ErrorShowType.NOTIFICATION:
               notification.open({
-                description: errorMessage,
+                description: msg,
                 message: errorCode,
               });
               break;
@@ -66,7 +99,7 @@ export const errorConfig: RequestConfig = {
               // TODO: redirect
               break;
             default:
-              message.error(errorMessage);
+              message.error(msg);
           }
         }
       } else if (error.response) {
@@ -100,9 +133,16 @@ export const errorConfig: RequestConfig = {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
 
-      if (data?.success === false) {
-        message.error('请求失败！');
-      }
+      console.log(data);
+      console.log('response', response);
+      console.log('拦截器');
+      //console.log(response);
+
+      //console.log(data.code);
+      // if (data.code === 0) {
+      //   message.error(data.msg);
+      // }
+
       return response;
     },
   ],

@@ -1,7 +1,7 @@
+import { GITHUB_LINK } from '@/constants';
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 import React from 'react';
-import {GITHUB_LINK} from "@/constants";
 
 const Footer: React.FC = () => {
   return (
@@ -10,14 +10,16 @@ const Footer: React.FC = () => {
         background: 'none',
       }}
       links={[
-
         {
           key: 'github',
-          title: <><GithubOutlined />  kuuuure</>,
+          title: (
+            <>
+              <GithubOutlined /> kuuuure Github
+            </>
+          ),
           href: GITHUB_LINK,
           blankTarget: true,
         },
-
       ]}
     />
   );
