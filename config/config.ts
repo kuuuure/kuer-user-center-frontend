@@ -5,6 +5,10 @@ import proxy from './proxy';
 import routes from './routes';
 const { REACT_APP_ENV = 'dev' } = process.env;
 export default defineConfig({
+
+  //ssr: {},
+
+
   /**
    * @name 开启 hash 模式
    * @description 让 build 之后的产物包含 hash 后缀。通常用于增量发布和避免浏览器加载缓存。
@@ -72,7 +76,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design Pro',
+  title: 'kure-user-center',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -131,4 +135,6 @@ export default defineConfig({
   },
   esbuildMinifyIIFE: true,
   requestRecord: {},
+
+
 });

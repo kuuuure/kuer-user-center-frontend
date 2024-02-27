@@ -12,7 +12,9 @@ import { extend } from 'umi-request';
  */
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
-  prefix: process.env.NODE_ENV === 'production' ? 'http://user-backend.code-nav.cn' : undefined,
+  //这里请求后端的域名
+  prefix: process.env.NODE_ENV === 'production' ? 'http://kuuure-backend' : undefined,
+  //prefix: process.env.NODE_ENV === 'production' ? 'http://user-backend.code-nav.cn' : undefined,
   // requestType: 'form',
 });
 

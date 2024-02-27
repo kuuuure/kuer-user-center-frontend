@@ -20,6 +20,11 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
+
+  //验证本机使用的环境
+  //alert(process.env.NODE_ENV);
+
+
   const fetchUserInfo = async () => {
     try {
       const msg = queryCurrentUser({
