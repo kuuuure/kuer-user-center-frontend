@@ -31,7 +31,7 @@ export async function getInitialState(): Promise<{
         skipErrorHandler: false,
       });
 
-      console.log('msg', msg);
+      //console.log('msg', msg);
 
       return msg;
     } catch (error) {

@@ -67,7 +67,7 @@ const Login: React.FC = () => {
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
-    console.log('在Login里面的userInfo：', userInfo);
+    //console.log('在Login里面的userInfo：', userInfo);
 
     if (userInfo) {
       flushSync(() => {
@@ -86,11 +86,12 @@ const Login: React.FC = () => {
         type,
       });
 
-      console.log('现在在HandlerSubmit');
-      console.log('user:', user);
+      //console.log('现在在HandlerSubmit');
+      //console.log('user:', user);
       //console.log("userLoginState:",userLoginState);
 
       if (user) {
+        //console.log(user);
         //console.log("登录成功");
         const defaultLoginSuccessMessage = '登录成功！';
 
@@ -99,17 +100,17 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
-        console.log('urlParams:', urlParams);
+        //console.log('urlParams:', urlParams);
         history.push(urlParams.get('redirect') || '/');
         return;
       }
       // 如果失败去设置用户错误信息
       //setUserLoginState(user);
     } catch (error) {
-      console.log('登录失败');
+      //console.log('登录失败');
       const defaultLoginFailureMessage = '登录失败，请重试！';
 
-      console.log(error);
+      //console.log(error);
 
       message.error(defaultLoginFailureMessage);
     }

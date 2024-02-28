@@ -89,7 +89,7 @@ const Register: React.FC = () => {
       // 注册
       const id = await register(values);
 
-      if (id >= 0) {
+      if (id !=null) {
         const defaultLoginSuccessMessage = '注册成功！';
         message.success(defaultLoginSuccessMessage);
 
@@ -107,7 +107,7 @@ const Register: React.FC = () => {
       //setUserLoginState(msg);
     } catch (error) {
       const defaultLoginFailureMessage = '注册失败，请重试！';
-      console.log(error);
+      //console.log(error);
       message.error(defaultLoginFailureMessage);
     }
   };

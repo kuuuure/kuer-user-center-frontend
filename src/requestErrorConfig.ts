@@ -49,8 +49,8 @@ export const errorConfig: RequestConfig = {
     errorThrower: (res) => {
       const { data, errorCode, msg } = res as unknown as ResponseStructure;
 
-      console.log('errorThrower开始工作');
-      console.log('res', res);
+      //console.log('errorThrower开始工作');
+      //console.log('res', res);
 
       if (errorCode !== 0) {
         const error: any = new Error(msg);
@@ -62,10 +62,10 @@ export const errorConfig: RequestConfig = {
     },
     // 错误接收及处理
     errorHandler: (error: any, opts: any) => {
-      console.log('errorHandler开始工作');
+      //console.log('errorHandler开始工作');
 
-      console.log(error);
-      console.log('opts:', opts);
+      //console.log(error);
+      //console.log('opts:', opts);
 
       if (opts?.skipErrorHandler) throw error;
 
@@ -133,9 +133,9 @@ export const errorConfig: RequestConfig = {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
 
-      console.log(data);
-      console.log('response', response);
-      console.log('拦截器');
+      // console.log(data);
+      // console.log('response', response);
+      // console.log('拦截器');
       //console.log(response);
 
       //console.log(data.code);

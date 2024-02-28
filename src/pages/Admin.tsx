@@ -4,7 +4,7 @@ import '@umijs/max';
 import { Alert, Card, Typography } from 'antd';
 import React from 'react';
 const Admin: React.FC = () => {
-  console.log('admin');
+  //console.log('admin');
 
   return (
     <PageContainer content={' 您是K星的管理员，可以管理K星的用户'}>

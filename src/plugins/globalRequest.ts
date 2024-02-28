@@ -13,7 +13,7 @@ import { extend } from 'umi-request';
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
   //这里请求后端的域名
-  prefix: process.env.NODE_ENV === 'production' ? 'http://kuuure-backend' : undefined,
+  prefix: process.env.NODE_ENV === 'production' ? 'http://106.53.160.28:8080' : undefined,
   //prefix: process.env.NODE_ENV === 'production' ? 'http://user-backend.code-nav.cn' : undefined,
   // requestType: 'form',
 });
@@ -22,7 +22,7 @@ const request = extend({
  * 请求拦截器
  */
 request.interceptors.request.use((url, options): any => {
-  console.log(`do request url = ${url}`);
+  //console.log(`do request url = ${url}`);
 
   return {
     url,

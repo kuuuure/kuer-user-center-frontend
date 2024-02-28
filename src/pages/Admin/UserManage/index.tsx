@@ -127,7 +127,7 @@ const UserManage: React.FC = () => {
       actionRef={actionRef}
       cardBordered
       request={async (params, sort, filter) => {
-        console.log(sort, filter);
+        //console.log(sort, filter);
         const list = await search();
         return {
           data: list,
@@ -143,7 +143,7 @@ const UserManage: React.FC = () => {
           option: { fixed: 'right', disable: true },
         },
         onChange(value) {
-          console.log('value: ', value);
+          //console.log('value: ', value);
         },
       }}
       rowKey="id"
